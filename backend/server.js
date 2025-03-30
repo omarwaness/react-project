@@ -12,7 +12,12 @@ const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors({ origin: ["http://localhost:5173", "https://react-project-khaki-eight.vercel.app"], credentials: true }));
+app.use(cors({
+  origin: ["http://localhost:5173", "https://react-project-eight-kappa.vercel.app"],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(cookieParser());
 
 // Connect to MongoDB
