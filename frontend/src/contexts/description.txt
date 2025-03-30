@@ -1,0 +1,5 @@
+
+
+
+in this file you will create the context for the project. 
+information you want to store in local storage that should be known by many components and sub-components

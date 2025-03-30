@@ -1,0 +1,27 @@
+/* ThemeToggle.css */
+.theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .theme-toggle:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Default (light theme) */
+  .theme-toggle svg {
+    color: black;
+  }
+  
+  /* Dark theme */
+  [data-theme="dark"] .theme-toggle svg {
+    color: white;
+  }
+  
