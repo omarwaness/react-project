@@ -22,7 +22,12 @@ mongoose
   .catch((err) => console.error(err));
 
 // Define API routes
+app.get("/", (req, res) => {
+  res.send("Backend is running! Try using Postman.");
+});
+
 app.use("/api/auth", require("./routes/authRoutes"));
+
 
 // Set the port for the server
 const PORT = process.env.PORT || 5000;
