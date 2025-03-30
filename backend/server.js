@@ -2,50 +2,30 @@
 require("dotenv").config();
 
 // Import required modules
-const express = require("express"); // Framework for handling HTTP requests
-const cors = require("cors"); // Middleware to enable Cross-Origin Resource Sharing (CORS)
-const cookieParser = require("cookie-parser"); // Middleware to parse cookies
-const mongoose = require("mongoose"); // ODM for MongoDB
-const path = require("path"); // Module to handle file paths
+const express = require("express");
+const cors = require("cors");
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
 
 // Initialize an Express application
 const app = express();
 
-// Middleware to parse incoming JSON requests
+// Middleware
 app.use(express.json());
-
-// Enable CORS to allow requests from the frontend
 app.use(cors({ origin: "http://localhost", credentials: true }));
-
-// Middleware to parse cookies from incoming requests
 app.use(cookieParser());
 
-// Connect to MongoDB using Mongoose
+// Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI) // Retrieve MongoDB URI from environment variables
-  .then(() => console.log("MongoDB Connected")) // Log success message on successful connection
-  .catch((err) => console.error(err)); // Log error if connection fails
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.error(err));
 
-// Define API routes for authentication
-app.use(
-  "/api/auth", 
-  require("./routes/authRoutes") // Import authentication-related routes
-);
+// Define API routes
+app.use("/api/auth", require("./routes/authRoutes"));
 
-// Serve static files from the React frontend build directory
-app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
-
-// Fallback route to serve the frontend index.html
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
-});
-
-// Set the port for the server (default to 5000 if not specified in environment variables)
+// Set the port for the server
 const PORT = process.env.PORT || 5000;
 
-// Start the Express server and listen on the specified port
-app.listen(
-  PORT,
-  "0.0.0.0",
-  () => console.log(`Server is running on port ${PORT}`)
-);
+// Start the Express server
+app.listen(PORT, "0.0.0.0", () => console.log(`Server is running on port ${PORT}`));
