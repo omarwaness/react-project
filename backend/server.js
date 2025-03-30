@@ -17,7 +17,6 @@ app.use(express.json());
 // Enable CORS to allow requests from the frontend
 app.use(cors({ origin: "http://localhost", credentials: true }));
 
-
 // Middleware to parse cookies from incoming requests
 app.use(cookieParser());
 
@@ -34,11 +33,11 @@ app.use(
 );
 
 // Serve static files from the React frontend build directory
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'frontend', 'dist')));
 
 // Fallback route to serve the frontend index.html
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'frontend', 'dist', 'index.html'));
 });
 
 // Set the port for the server (default to 5000 if not specified in environment variables)
